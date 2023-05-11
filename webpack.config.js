@@ -9,17 +9,19 @@ const { ANALYZE, NODE_ENV } = process.env;
 const production = NODE_ENV === 'production';
 
 const makeConfig = ({ uuid, srcDirName, index }) => ({
+	name: srcDirName,
     context: path.resolve(__dirname),
     entry: {
 		config: './' + path.join('components', srcDirName, 'config.json'),
-		component: './' + path.join('components', srcDirName, 'src.jsx'),
+		component: './' + path.join('components', srcDirName, 'index.js'),
 	},
     mode: NODE_ENV ?? 'development',
-    devtool: production ? undefined : 'source-map',
+    devtool: production ? false : 'source-map',
     output: {
         path: path.join(__dirname, 'dist', srcDirName, 'latest'),
         filename: '[name].[contenthash].js',
         chunkFilename: '[id].[contenthash].js',
+		clean: true,
     },
     resolve: {
         modules: ['src', 'shared', 'node_modules'],
@@ -31,9 +33,18 @@ const makeConfig = ({ uuid, srcDirName, index }) => ({
             'process.env.NODE_ENV': JSON.stringify(NODE_ENV ?? 'development'),
         }),
 		new container.ModuleFederationPlugin({
-		    name: 'component',
+		    name: `component${uuid.replace(/\-/g, '_')}`,
+			filename: 'component.js',
+			exposes: {
+				'./component': './' + path.join('components', srcDirName, 'component'),
+			},
 			shared: {
-				react: { eager: true },
+				react: {
+					requiredVersion: '>=17.0.0 <19.0.0',
+					eager: false,
+					singleton: true,
+					strictVersion: true,
+				},
 			},
 		}),
 		new WebpackManifestPlugin({
@@ -55,7 +66,10 @@ const makeConfig = ({ uuid, srcDirName, index }) => ({
                 test: /\.css$/,
                 use: [
 					'style-loader',
-                    'css-loader',
+                    {
+						loader: 'css-loader',
+						options: { modules: true },
+					},
                 ],
             },
             {
@@ -72,20 +86,14 @@ const makeConfig = ({ uuid, srcDirName, index }) => ({
             },
         ],
     },
-	...(index === 0 ? {
-		devServer: {
-			compress: true,
-			port: process.env.HOST_PORT || 8634,
-			static: {
-			    directory: path.join(__dirname, 'dist'),
-				watch: true,
-				serveIndex: true,
-			},
-			devMiddleware: {
-				writeToDisk: true,
-			},
+	devServer: {
+		compress: true,
+		port: process.env.HOST_PORT || 8634,
+		allowedHosts: 'all',
+		devMiddleware: {
+			publicPath: '/' + path.join(uuid, 'latest'),
 		},
-	} : {}),
+	},
 });
 
 module.exports = async () => Promise.all((await file.readdir(path.join(__dirname, 'components'), { withFileTypes: true }))
