@@ -73,7 +73,7 @@ const makeConfig = ({ uuid, srcDirName, index }) => ({
                 ],
             },
             {
-                test: /\.(jpg|png|gif)$/,
+                test: /\.(jpg|jpeg|png|gif)$/,
                 use: [
                     {
                         loader: 'url-loader',
