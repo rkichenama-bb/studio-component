@@ -1,1 +1,1 @@
-export default (import('./component').default);
+export { default } from './component';
