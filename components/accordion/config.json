@@ -2,6 +2,7 @@
     "uuid": "67eaffb2-b4ce-4b96-ac90-a3ee29df5816",
     "displayName": "Accordion",
     "hasChildren": true,
+    "editorIcon": "accordion.png",
     "options": [
 		{
             "type": "field",
