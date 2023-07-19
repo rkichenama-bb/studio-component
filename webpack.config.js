@@ -8,7 +8,7 @@ const { ANALYZE, NODE_ENV } = process.env;
 
 const production = NODE_ENV === 'production';
 
-const makeConfig = ({ uuid, srcDirName, index }) => ({
+const makeConfig = ({ uuid, editorIcon, srcDirName, index }) => ({
     name: srcDirName,
     context: path.resolve(__dirname, 'components', srcDirName),
     entry: {
@@ -50,7 +50,7 @@ const makeConfig = ({ uuid, srcDirName, index }) => ({
         new CopyPlugin({
             patterns: [
                 './config.json',
-            ],
+            ].concat(editorIcon ?? []),
         }),
     ],
     module: {
