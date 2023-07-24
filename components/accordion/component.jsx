@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocalVariables } from 'bbstudio/hooks';
 import styles from './styles';
 import chevron from './chevron.svg';
 

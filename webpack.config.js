@@ -86,6 +86,9 @@ const makeConfig = ({ uuid, editorIcon, srcDirName, index }) => ({
             }
         ],
     },
+    externals: {
+        'bbstudio/hooks': ['bbstudio', 'hooks'],
+    },
     devServer: {
         compress: true,
         port: process.env.HOST_PORT || 8634,
