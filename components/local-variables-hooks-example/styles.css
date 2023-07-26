@@ -1,0 +1,9 @@
+.wrapper {
+	display: flex;
+	justify-content: space-evenly;
+	padding: 20px 0;
+}
+.button {
+	background-color: #2E71F0;
+	color: #ffffff;
+}

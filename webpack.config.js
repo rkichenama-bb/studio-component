@@ -23,6 +23,9 @@ const makeConfig = ({ uuid, editorIcon, srcDirName, index }) => ({
         clean: true,
         publicPath: `/assets/components/${uuid}/latest/`,
     },
+    externals: {
+        'bbstudio/hooks': ['bbstudio', 'hooks'],
+    },
     resolve: {
         modules: ['src', 'shared', 'node_modules'],
         extensions: ['.ts', '.tsx', '.js', '.jsx', '.css', '.json'],
