@@ -12,16 +12,18 @@ const makeConfig = ({ uuid, editorIcon, srcDirName, index }) => ({
     name: srcDirName,
     context: path.resolve(__dirname, 'components', srcDirName),
     entry: {
+        [`component${uuid.replace(/\-/g, '_')}`]: '../../setup-public-path',
         component: './index.js',
     },
     mode: NODE_ENV ?? 'development',
     devtool: production ? false : 'source-map',
     output: {
-        path: path.join(__dirname, 'dist', srcDirName, 'latest'),
+        path: path.join(__dirname, 'dist', srcDirName),
         filename: '[name].[contenthash].js',
         chunkFilename: '[id].[contenthash].js',
         clean: true,
-        publicPath: `/assets/components/${uuid}/latest/`,
+        publicPath: 'auto',
+        uniqueName: `./component_${uuid.replace(/\-/g, '_')}`,
     },
     externals: {
         'bbstudio/hooks': ['bbstudio', 'hooks'],
@@ -71,7 +73,11 @@ const makeConfig = ({ uuid, editorIcon, srcDirName, index }) => ({
                     'style-loader',
                     {
                         loader: 'css-loader',
-                        options: { modules: true },
+                        options: {
+                            modules: {
+                                localIdentHashSalt: uuid
+                            },
+                        },
                     },
                 ],
             },
@@ -97,6 +103,7 @@ const makeConfig = ({ uuid, editorIcon, srcDirName, index }) => ({
         port: process.env.HOST_PORT || 8634,
         allowedHosts: 'auto',
         devMiddleware: {
+            publicPath: `/assets/components/${uuid}/latest/`,
         },
     },
 });
