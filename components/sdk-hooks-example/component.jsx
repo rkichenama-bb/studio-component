@@ -11,20 +11,36 @@ export default ({
 }) => {
 	const [showLocalVariables, setShowLocalVariables] = useState(false);
 	const allLocalVariables = useLocalVariables();
-	const [counterValue, setCounterValue] = useLocalVariable(localVariableName, '0');
-	const [showInteractionData, setShowInteractionData] = useState(false);
+	const [deviceCounterValue, setDeviceCounterValue] = useLocalVariable(localVariableName, '0');
+	const [showInteractionData, setShowInteractionData] = useState(true);
 	const { isLoading, isError, interaction } = useInteraction();
-	const counterValueInt = parseInt(counterValue) || 0
-	const counterValueText = counterValueInt.toString();
+	const deviceCounterValueInt = parseInt(deviceCounterValue) || 0
+	const deviceCounterValueText = deviceCounterValueInt.toString();
+	const tagCounterValueInt = parseInt(interaction?.object?.variables.counter) || 0
+	const tagCounterValueText = tagCounterValueInt.toString();
 
-	const incrementCounter = () => {
-		const nextInt = counterValueInt + 1;
-		setCounterValue(nextInt.toString());
+	const incrementDeviceCounter = () => {
+		const nextInt = deviceCounterValueInt + 1;
+		setDeviceCounterValue(nextInt.toString());
 	}
 
-	const decrementCounter = () => {
-		const nextInt = counterValueInt - 1;
-		setCounterValue(nextInt.toString());
+	const decrementDeviceCounter = () => {
+		const nextInt = deviceCounterValueInt - 1;
+		setDeviceCounterValue(nextInt.toString());
+	}
+
+	const incrementTagCounter = async () => {
+		const nextInt = tagCounterValueInt + 1;
+		await interaction.object.setObjectVariables({
+			counter: nextInt.toString(),
+		});
+	}
+
+	const decrementTagCounter = async () => {
+		const nextInt = tagCounterValueInt - 1;
+		await interaction.object.setObjectVariables({
+			counter: nextInt.toString(),
+		});
 	}
 
 	const toggleShowLocalVariables = () => {
@@ -37,23 +53,24 @@ export default ({
 
 	return (
 		<>
+			<h2>Local Variables</h2>
 			<div
 				className={styles.wrapper}
 			>
 				<button
 					type="button"
 					className={styles.button}
-					onClick={decrementCounter}
+					onClick={decrementDeviceCounter}
 				>
 					Decrement
 				</button>
 				<span>
-					Counter value: {counterValueText}
+					Counter value: {deviceCounterValueText}
 				</span>
 				<button
 					type="button"
 					className={styles.button}
-					onClick={incrementCounter}
+					onClick={incrementDeviceCounter}
 				>
 					Increment
 				</button>
@@ -78,6 +95,37 @@ export default ({
 						Show all local variables
 					</button>
 				)}
+			</div>
+			{showLocalVariables && (
+				<pre>
+					{JSON.stringify(allLocalVariables, null, 2)}
+				</pre>
+			)}
+			<h2>Object Variables</h2>
+			<div
+				className={styles.wrapper}
+			>
+				<button
+					type="button"
+					className={styles.button}
+					onClick={decrementTagCounter}
+				>
+					Decrement
+				</button>
+				<span>
+					Counter value: {tagCounterValueText}
+				</span>
+				<button
+					type="button"
+					className={styles.button}
+					onClick={incrementTagCounter}
+				>
+					Increment
+				</button>
+			</div>
+			<div
+				className={styles.wrapper}
+			>
 				{showInteractionData ? (
 					<button
 						type="button"
@@ -96,11 +144,6 @@ export default ({
 					</button>
 				)}
 			</div>
-			{showLocalVariables && (
-				<pre>
-					{JSON.stringify(allLocalVariables, null, 2)}
-				</pre>
-			)}
 			{showInteractionData && (
 				<InteractionData
 					isLoading={isLoading}
