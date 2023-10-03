@@ -42,6 +42,7 @@ const makeConfig = ({ uuid, editorIcon, srcDirName, index }) => ({
             filename: 'component.js',
             exposes: {
                 './component': './index.js',
+                './config': './config.json',
             },
             shared: {
                 react: {

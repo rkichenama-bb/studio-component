@@ -6,8 +6,13 @@ import {
 	useInteraction,
 } from 'bbstudio/hooks';
 
-export default ({
-	options: { localVariableName },
+const SDKHooksExample = ({
+	options: {
+		localVariableName,
+		exampleMacroValue,
+		exampleMacroValue2,
+	},
+	optionStatus,
 }) => {
 	const [showLocalVariables, setShowLocalVariables] = useState(false);
 	const allLocalVariables = useLocalVariables();
@@ -102,6 +107,20 @@ export default ({
 				</pre>
 			)}
 			<h2>Object Variables</h2>
+			<div style={{ textAlign: 'center' }}>
+				<br />
+				Macro 1 value: {
+					optionStatus?.exampleMacroValue?.status === 'Error'
+						? `An error has occurred: ${optionStatus.exampleMacroValue.message}`
+						: exampleMacroValue
+				}
+				<br />
+				Macro 2 value: {
+					optionStatus?.exampleMacroValue2?.status === 'Error'
+						? `An error has occurred: ${optionStatus.exampleMacroValue2.message}`
+						: exampleMacroValue2
+				}
+			</div>
 			<div
 				className={styles.wrapper}
 			>
@@ -172,3 +191,8 @@ const InteractionData = ({
 		</pre>
 	);
 };
+
+SDKHooksExample.renderWhenMacroUnresolved = true;
+SDKHooksExample.renderWhenMacroError = true;
+
+export default SDKHooksExample;

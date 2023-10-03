@@ -8,6 +8,20 @@
             "name": "localVariableName",
             "label": "Local Variable Name",
             "defaultValue": "counter"
+        },
+        {
+            "type": "field",
+            "name": "exampleMacroValue",
+            "label": "Example Macro Value",
+            "enableMacros": true,
+            "defaultValue": "{{ \"Enter example macro here\" }}"
+        },
+        {
+            "type": "code",
+            "name": "exampleMacroValue2",
+            "label": "Example Macro Value 2",
+            "enableMacros": true,
+            "defaultValue": "{{ \"Enter example macro 2 here\" }}"
         }
     ]
 }
