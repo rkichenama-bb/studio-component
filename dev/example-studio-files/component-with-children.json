@@ -1,0 +1,56 @@
+{
+    "attributes": {
+        "backgroundColor": "#ffffff",
+        "backgroundImage": null,
+        "componentStyle": "none"
+    },
+    "relationships": {
+        "components": {
+            "items": [
+                {
+                    "componentLists": {
+                        "content": "1"
+                    },
+                    "id": "1",
+                    "options": {
+                        "componentUuid": "00000000-0000-0000-0000-000000000000",
+                        "userDefinedOptions": {
+                        }
+                    },
+                    "typeId": "36"
+                }
+            ],
+            "lists": [
+                {
+                    "componentKey": "content",
+                    "componentTypeId": "36",
+                    "id": "1",
+                    "items": [
+                        {
+                            "id": "2",
+                            "options": {
+                                "action": "none",
+                                "actionAnalytics": {
+                                    "customOptions": {},
+                                    "type": "default"
+                                },
+                                "alt": "curry",
+                                "opValue": "1",
+                                "source": "url",
+                                "src": "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/113777-0b21d44.jpg",
+                                "varOperation": "set"
+                            },
+                            "typeId": "17"
+                        }
+                    ]
+                }
+            ],
+            "nextId": 3,
+            "nextListId": 2
+        },
+        "customComponentVersions": {
+            "00000000-0000-0000-0000-000000000000": "latest"
+        }
+    },
+    "version": "v0.1.5"
+}

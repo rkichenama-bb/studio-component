@@ -1,0 +1,29 @@
+{
+    "attributes": {
+        "backgroundColor": "#ffffff",
+        "backgroundImage": null,
+        "componentStyle": "none"
+    },
+    "relationships": {
+        "components": {
+            "items": [
+                {
+                    "id": "1",
+                    "options": {
+                        "componentUuid": "00000000-0000-0000-0000-000000000000",
+                        "userDefinedOptions": {
+                        }
+                    },
+                    "typeId": "36"
+                }
+            ],
+            "lists": [],
+            "nextId": 2,
+            "nextListId": 1
+        },
+        "customComponentVersions": {
+            "00000000-0000-0000-0000-000000000000": "latest"
+        }
+    },
+    "version": "v0.1.5"
+}
