@@ -1,0 +1,25 @@
+{
+    "displayName": "Details",
+    "hasChildren": false,
+    "options": [
+        {
+            "defaultValue": false,
+            "label": "Expanded by default",
+            "name": "startOpen",
+            "type": "checkbox"
+        },
+        {
+            "defaultValue": "Title",
+            "label": "Title",
+            "name": "title",
+            "type": "field"
+        },
+        {
+            "defaultValue": "",
+            "label": "Body",
+            "name": "body",
+            "type": "htmlEditor"
+        }
+    ],
+    "uuid": "dce216de-e400-42b8-a35a-cea8205c7c06"
+}
