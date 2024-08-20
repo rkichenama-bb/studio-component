@@ -1,19 +1,7 @@
 {
-    "displayName": "Details",
+    "displayName": "Text (Beta)",
     "hasChildren": false,
     "options": [
-        {
-            "defaultValue": false,
-            "label": "Expanded by default",
-            "name": "startOpen",
-            "type": "checkbox"
-        },
-        {
-            "defaultValue": "Title",
-            "label": "Title",
-            "name": "title",
-            "type": "field"
-        },
         {
             "defaultValue": "",
             "label": "Body",
@@ -21,5 +9,5 @@
             "type": "htmlEditor"
         }
     ],
-    "uuid": "dce216de-e400-42b8-a35a-cea8205c7c06"
+    "uuid": "b613419b-540c-4243-ad70-4791844f01ca"
 }
