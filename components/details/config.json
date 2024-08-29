@@ -6,8 +6,9 @@
             "defaultValue": "",
             "label": "Body",
             "name": "body",
+            "enableMacros": true,
             "type": "htmlEditor"
         }
     ],
-    "uuid": "b613419b-540c-4243-ad70-4791844f01ca"
+    "uuid": "6e1b2c6b-a678-40a1-8723-9c98dfd7301e"
 }
